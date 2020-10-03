@@ -24,7 +24,7 @@ public class StudentGroupService {
 
     public StudentGroup save(StudentGroup studentGroup) {
         if (Objects.isNull(studentGroup.getNum())) {
-            log.error("try save incorrect user: " + studentGroup.toString());
+            log.error("try save incorrect userGroup: " + studentGroup.toString());
             return studentGroup;
         }
         return studentgroupRepository.save(studentGroup);

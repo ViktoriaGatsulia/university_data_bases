@@ -12,6 +12,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 
@@ -62,17 +65,28 @@ curl -H 'Content-Type:application/json' -d '{"fio" : "Viktoria Gatsulia", "maste
         return ResponseEntity.ok(studentGroup);
     }
 
-    @GetMapping("findGroups/")
+    @GetMapping("/findGroups")
     public ResponseEntity findGroups() {
         log.info("call /findGroups");
         return ResponseEntity.ok(studentgroupService.findAll());
     }
 
-    @GetMapping("addStudentsForGroup/id_group={id_group}")
-    public ResponseEntity findStudents(@PathVariable Long id_group, @RequestBody Student student) {
+    @GetMapping("/findStudentByGroup/id={id}")
+    public ResponseEntity findStudentByGroup(@PathVariable Long id) {
+        log.info("call /findStudentByGroup/id=" + id);
+        Optional<StudentGroup> byId = studentgroupService.findById(id);
+        if (byId.isPresent()) {
+            return ResponseEntity.ok(byId.get().getStudent_list());
+        }
+        return ResponseEntity.notFound().build();
+    }
+
+    @PostMapping("/addStudentsForGroup/id_group={id_group}")
+    public ResponseEntity addStudentsForGroup(@PathVariable Long id_group, @RequestBody Student student) {
         log.info("call /addStudentsForGroup/id_group=" + id_group);
         Optional<StudentGroup> byId = studentgroupService.findById(id_group);
         if (byId.isPresent()) {
+            student.setMaster_group(byId.get());
             studentService.save(student);
         }
         return !byId.isPresent()
@@ -91,3 +105,9 @@ curl -H 'Content-Type:application/json' -d '{"fio" : "Viktoria Gatsulia", "maste
     }
 
 }
+
+
+
+
+
+

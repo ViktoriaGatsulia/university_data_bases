@@ -27,6 +27,10 @@ public class StudentService {
     }
 
     public Student save(Student student) {
+        if (Objects.isNull(student.getFio())) {
+            log.error("try save incorrect user: " + student.toString());
+            return student;
+        }
         Long id = student.getMaster_group().getId_group();
         Optional<StudentGroup> optByIdGroup = studentGroupRepository.findById(id);
         if(optByIdGroup.isPresent()) {

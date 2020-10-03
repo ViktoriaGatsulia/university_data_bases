@@ -97,7 +97,7 @@ public class Student {
     @Override
     public String toString() {
         return "Student{" +
-                "master_group=" + Optional.ofNullable(master_group) +
+                "master_group_id=" + Optional.ofNullable(master_group.getId_group()) +
                 ", id_student=" + Optional.ofNullable(id_student) +
                 ", date_add=" + Optional.ofNullable(date_add) +
                 ", last_name='" + Optional.ofNullable(fio) + '\'' +

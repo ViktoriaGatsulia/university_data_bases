@@ -19,10 +19,6 @@
         <th>Действия</th>
     </tr>
     </thead>
-    <tr th:each="card : ${userById.bankCard}">
-        <td th:text="${card.card_number}"/>
-        <td th:text="${card.balance}"/>
-    </tr>
     <tr ng-repeat="student_group in student_group">
         <td style="width: 5%;">{{student_group.num}}</td>
         <td style="width: 30%">{{student_group.count}}</td>
