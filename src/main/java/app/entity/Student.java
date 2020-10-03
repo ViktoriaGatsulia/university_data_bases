@@ -6,6 +6,7 @@ import org.apache.log4j.Logger;
 import javax.persistence.*;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Objects;
 import java.util.Optional;
 
 @Entity
@@ -88,6 +89,13 @@ public class Student {
 
     @Override
     public String toString() {
+        if (Objects.isNull(master_group))
+            return "Student{" +
+                    "master_group_id=" + Optional.ofNullable(master_group) +
+                    ", id_student=" + Optional.ofNullable(id_student) +
+                    ", date_add=" + Optional.ofNullable(date_add) +
+                    ", last_name='" + Optional.ofNullable(fio) + '\'' +
+                    '}';
         return "Student{" +
                 "master_group_id=" + Optional.ofNullable(master_group.getId_group()) +
                 ", id_student=" + Optional.ofNullable(id_student) +
@@ -95,4 +103,5 @@ public class Student {
                 ", last_name='" + Optional.ofNullable(fio) + '\'' +
                 '}';
     }
+
 }

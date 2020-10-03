@@ -12,8 +12,14 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
+/**
+ * Класс-сервис для работы со Student репозиторием
+ * @author ViktoriaGatsulia
+ * @version 1.0
+ */
 @Service
 public class StudentService {
+
 
     private static final Logger log = Logger.getLogger(StudentService.class.getName());
 

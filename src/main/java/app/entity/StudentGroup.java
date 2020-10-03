@@ -4,10 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.apache.log4j.Logger;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
+import java.util.*;
 
 @Entity
 @Table
@@ -63,6 +60,12 @@ public class StudentGroup {
     }
 
     public List<Student> getStudent_list() {
+        student_list.sort(new Comparator<Student>() {
+            @Override
+            public int compare(Student o1, Student o2) {
+                return -(String.CASE_INSENSITIVE_ORDER.compare(o1.getFio(), o2.getFio()));
+            }
+        });
         return student_list;
     }
 
