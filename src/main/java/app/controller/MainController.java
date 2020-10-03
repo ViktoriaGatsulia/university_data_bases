@@ -171,6 +171,7 @@ public class MainController {
     /**
      * Delete-метод для удаления студента из группы
      * (при удалении последнего последнего участника группы, группа продолжает существовать)
+     * `curl -X DELETE 'localhost:8080/deleteStudent/id=7'
      *
      * @param id - идентификатор удаляемой группы
      * @return - страница noContent
