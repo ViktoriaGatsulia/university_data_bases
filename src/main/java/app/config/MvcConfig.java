@@ -8,6 +8,9 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 /**
  * Mvc конфигурация для быстрого написания шаблонных маппингов
+ *
+ * @author ViktoriaGatsulia
+ * @version 1.0
  */
 @Configuration
 public class MvcConfig implements WebMvcConfigurer {
@@ -17,6 +20,7 @@ public class MvcConfig implements WebMvcConfigurer {
     public void addViewControllers(ViewControllerRegistry registry) {
         registry.addViewController("/login").setViewName("login");
     }
+
     /**
      * Метод обработки ресурсов в определенных ссылках
      */
