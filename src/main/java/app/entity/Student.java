@@ -30,11 +30,8 @@ public class Student {
     @Column(name = "date_add")
     private Date date_add;
 
-    @Column(name = "first_name")
-    private String first_name;
-
-    @Column(name = "last_name")
-    private String last_name;
+    @Column(name = "fio")
+    private String fio;
 
     public Student() {
         date_add = new Date();
@@ -49,19 +46,25 @@ public class Student {
 //        this.last_name = last_name;
 //    }
 
-    public Student(StudentGroup master_group, String first_name, String last_name) {
+    public Student(StudentGroup master_group, String fio) {
         this.master_group = master_group;
-        this.first_name = first_name;
-        this.last_name = last_name;
+        this.fio = fio;
         this.date_add = new Date();
         log.info("Use first constructor");
     }
 
-    public Student(String first_name, String last_name) {
-        this.first_name = first_name;
-        this.last_name = last_name;
+    public Student(String fio) {
+        this.fio = fio;
         this.date_add = new Date();
         log.info("Use second constructor");
+    }
+
+    public void setFio(String fio) {
+        this.fio = fio;
+    }
+
+    public String getFio() {
+        return fio;
     }
 
     public StudentGroup getMaster_group() {
@@ -91,30 +94,13 @@ public class Student {
         this.date_add = new Date();
     }
 
-    public String getFirst_name() {
-        return first_name;
-    }
-
-    public void setFirst_name(String first_name) {
-        this.first_name = first_name;
-    }
-
-    public String getLast_name() {
-        return last_name;
-    }
-
-    public void setLast_name(String last_name) {
-        this.last_name = last_name;
-    }
-
     @Override
     public String toString() {
         return "Student{" +
                 "master_group=" + Optional.ofNullable(master_group) +
                 ", id_student=" + Optional.ofNullable(id_student) +
                 ", date_add=" + Optional.ofNullable(date_add) +
-                ", first_name='" + Optional.ofNullable(first_name) + '\'' +
-                ", last_name='" + Optional.ofNullable(last_name) + '\'' +
+                ", last_name='" + Optional.ofNullable(fio) + '\'' +
                 '}';
     }
 }

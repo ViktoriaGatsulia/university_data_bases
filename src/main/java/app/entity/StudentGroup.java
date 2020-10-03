@@ -22,8 +22,11 @@ public class StudentGroup {
     @Column(name = "num")
     private String num;
 
+    @Column(name = "count")
+    private int count;
+
     @JsonIgnoreProperties(value = "student_list", allowSetters = true)
-    @OneToMany(mappedBy="master_group", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy="master_group", fetch = FetchType.EAGER, orphanRemoval = true)
     private List<Student> student_list = new ArrayList<>();
 
     public StudentGroup() {}
@@ -78,6 +81,18 @@ public class StudentGroup {
 
     public void addStudent(Student student) {
         log.info("Use addStudent, student_list = " + Objects.isNull(student_list) + " student = " + Objects.isNull(student));
+        if (Objects.isNull(student_list)) {
+            student_list = new ArrayList<>();
+        }
         student_list.add(student);
+    }
+
+    public int getCount() {
+        return reCount();
+    }
+
+    public int reCount() {
+        this.count = Objects.isNull(student_list) ? 0 : student_list.size();
+        return this.count;
     }
 }

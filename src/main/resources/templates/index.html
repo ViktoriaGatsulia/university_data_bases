@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Index</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+</head>
+<body ng-app="MAIN_PAGE" ng-controller="MAIN_PAGE_CONTROLLER">
+<table>
+    <tr>
+        <td><h1>Группа №</h1></td>
+        <td><h1 th:text="${groupById.num}"></h1></td>
+    </tr>
+</table>
+
+<table class="table table-hover">
+    <tbody class="ui-sortable">
+    <thead>
+    <tr>
+        <th>Дата добавления</th>
+        <th>ФИО студента</th>
+        <th>Действия</th>
+    </tr>
+    </thead>
+    <tr ng-repeat="student in student">
+        <td style="width: 5%;">{{student.date_add}}</td>
+        <td style="width: 30%">{{student.fio}}</td>
+        <td style="width: 5%">
+            <div class="button-group" style="align: center; width: 100%;">
+                <a class="button" href="/getGroupById/id={{student.id_student}}">Edit</a>
+            </div>
+        </td>
+    </tr>
+</table>
+
+<form>
+    <div class="form-group">
+        <label for="inputUserId">ФИО нового студента</label>
+        <input ng-model="student.fio" class="form-control" id="inputUserId" required>
+    </div>
+
+    <div class="button-group">
+        <button class="button" type="submit" th:onclick="'getPropId(\'' + ${groupById.id_group} + '\');'" ng-click="addStudentsForGroup()">Сохранить студента</button>
+    </div>
+</form>
+
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.2/angular.min.js"></script>
+
+<script type="text/javascript">
+
+        var idForUser = 0;
+
+        var app = angular.module("MAIN_PAGE", []);
+        app.controller("MAIN_PAGE_CONTROLLER", function($scope, $http) {
+            console.log("Start JS");
+            $scope.student = [];
+
+            $scope.getStudent = function() {
+                $http({
+                    url: '/findStudents/',
+                    method: 'GET'
+                }).then(function(response){
+                    $scope.student = response.data;
+                    console.log($scope.student);
+                })
+            }
+
+            $scope.getStudent();
+
+            $scope.save_student = function() {
+                console.log($scope.student);
+                $http({
+                    url: '/saveStudent',
+                    method: 'POST',
+                    data:
+                    {
+                        fio : $scope.student.fio
+                    }
+                }).then(function(response){
+                    $scope.getStudent();
+                    console.log(response);
+                });
+            }
+
+            $scope.addStudentsForGroup = function() {
+                $http({
+                    url: '/addStudentsForGroup/group_id=' + idForUser,
+                    method: 'POST',
+                    data:
+                    {
+                        fio : $scope.student.fio
+                    }
+                }).then(function(response){
+                    console.log(response);
+                });
+            }
+
+        });
+
+        function getPropId(inputID){
+            idForUser = inputID;
+        }
+
+    </script>
+
+
+</body>
+</html>
