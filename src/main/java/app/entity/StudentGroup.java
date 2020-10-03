@@ -26,7 +26,7 @@ public class StudentGroup {
     private int count;
 
     @JsonIgnoreProperties(value = "student_list", allowSetters = true)
-    @OneToMany(mappedBy="master_group", fetch = FetchType.EAGER, orphanRemoval = true)
+    @OneToMany(mappedBy="master_group", fetch = FetchType.EAGER)
     private List<Student> student_list = new ArrayList<>();
 
     public StudentGroup() {}

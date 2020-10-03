@@ -17,7 +17,7 @@ public class Student {
     private static final SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
     @JsonIgnoreProperties(value = "student_list", allowSetters = true)
-    @ManyToOne(optional = true, cascade = CascadeType.ALL)
+    @ManyToOne(optional = true)
     @JoinColumn(name = "id_group")
     private StudentGroup master_group;
 
@@ -37,14 +37,6 @@ public class Student {
         date_add = new Date();
         log.info("Use empty constructor");
     }
-
-//    public Student(StudentGroup master_group, Long id_student, Date date_add, String first_name, String last_name) {
-//        this.master_group = master_group;
-//        this.id_student = id_student;
-//        this.date_add = date_add;
-//        this.first_name = first_name;
-//        this.last_name = last_name;
-//    }
 
     public Student(StudentGroup master_group, String fio) {
         this.master_group = master_group;

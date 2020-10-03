@@ -104,6 +104,12 @@ curl -H 'Content-Type:application/json' -d '{"fio" : "Viktoria Gatsulia", "maste
                 : "not_found";
     }
 
+    @DeleteMapping("/deleteStudent/id={id}")
+    public ResponseEntity<?> deleteStudent(@PathVariable Long id) {
+        studentService.deleteById(id);
+        return ResponseEntity.noContent().build();
+    }
+
 }
 
 

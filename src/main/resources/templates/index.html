@@ -28,7 +28,7 @@
         <td style="width: 30%">{{student.fio}}</td>
         <td style="width: 5%">
             <div class="button-group" style="align: center; width: 100%;">
-                <a class="button" href="/getGroupById/id={{student.id_student}}">Delete</a>
+                <button class="button"  ng-click="deleteStudent(student.id_student)">Delete</button>
             </div>
         </td>
     </tr>
@@ -93,6 +93,17 @@
                 }).then(function(response){
                     $scope.getStudent();
                     console.log(response);
+                });
+            }
+
+            $scope.deleteStudent = function(id_delete) {
+                console.log(id_delete)
+                $http({
+                    url: '/deleteStudent/id=' + id_delete,
+                    method: 'DELETE',
+                }).then(function(response){
+                    $scope.getStudent();
+                    console.log("delete student");
                 });
             }
 
