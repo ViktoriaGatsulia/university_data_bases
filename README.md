@@ -1,1 +1,1 @@
-# university_data_bases
+# База данных N-го университета
